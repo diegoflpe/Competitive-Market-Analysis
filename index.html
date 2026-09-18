@@ -48,24 +48,120 @@
   /* LISTA DE LOJAS */
   main { padding: 12px 16px 100px; padding-bottom: calc(100px + env(safe-area-inset-bottom)); }
   .store-list { display: flex; flex-direction: column; gap: 10px; }
-  .store-card { background: var(--card); border-radius: var(--radius); padding: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-left: 5px solid var(--border); cursor: pointer; display: flex; gap: 12px; align-items: flex-start; }
-  .store-card:active { transform: scale(0.98); }
+
+  .store-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border-left: 5px solid var(--border);
+    transition: border-color 0.2s;
+  }
   .store-card[data-status="aberta"] { border-left-color: var(--success); }
   .store-card[data-status="fechada"] { border-left-color: var(--danger); }
   .store-card[data-status="tapume"] { border-left-color: var(--warning); }
   .store-card[data-status="nova"] { border-left-color: var(--primary-light); }
   .store-card[data-status="pendente"] { border-left-color: var(--gray); }
+
+  .store-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 10px; }
   .store-info { flex: 1; min-width: 0; }
-  .store-number { font-size: 11px; font-weight: 700; color: var(--gray); text-transform: uppercase; }
-  .store-name { font-size: 16px; font-weight: 600; margin: 2px 0 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .store-meta { font-size: 12px; color: var(--gray); display: flex; flex-wrap: wrap; gap: 8px; }
-  .store-status-tag { display: inline-flex; gap: 4px; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 6px; text-transform: uppercase; }
-  .status-aberta { background: #dcfce7; color: #15803d; }
-  .status-fechada { background: #fee2e2; color: #b91c1c; }
-  .status-tapume { background: #fef3c7; color: #b45309; }
-  .status-nova { background: #dbeafe; color: #1d4ed8; }
-  .status-pendente { background: #e2e8f0; color: #475569; }
-  .store-chevron { color: var(--gray); font-size: 20px; margin-top: 8px; opacity: 0.5; }
+  .store-number { font-size: 11px; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: 0.3px; }
+  .store-name { font-size: 15px; font-weight: 600; margin-top: 2px; color: var(--text); line-height: 1.25; word-break: break-word; }
+  .store-date { font-size: 11px; color: var(--gray); white-space: nowrap; }
+
+  /* BOTÕES DE STATUS INLINE */
+  .status-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+  .status-btn {
+    padding: 10px 4px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    background: white;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    transition: all 0.15s;
+    font-family: inherit;
+    line-height: 1.1;
+    min-height: 52px;
+  }
+  .status-btn .ico { font-size: 18px; line-height: 1; }
+  .status-btn:active { transform: scale(0.95); }
+
+  /* Estado selecionado por tipo */
+  .status-btn[data-value="aberta"].selected {
+    background: #dcfce7; border-color: var(--success); color: #15803d;
+  }
+  .status-btn[data-value="fechada"].selected {
+    background: #fee2e2; border-color: var(--danger); color: #b91c1c;
+  }
+  .status-btn[data-value="tapume"].selected {
+    background: #fef3c7; border-color: var(--warning); color: #b45309;
+  }
+  .status-btn[data-value="nova"].selected {
+    background: #dbeafe; border-color: var(--primary-light); color: #1d4ed8;
+  }
+
+  /* Feedback de salvamento */
+  .store-card.saving { opacity: 0.7; }
+  .store-card.saved {
+    animation: flashSaved 0.6s ease;
+  }
+  @keyframes flashSaved {
+    0% { background: #f0fdf4; }
+    100% { background: var(--card); }
+  }
+
+  /* Linha de ações secundárias */
+  .store-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border);
+    gap: 8px;
+  }
+  .obs-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--gray);
+    font-size: 12px;
+    padding: 6px 4px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: inherit;
+    min-width: 0;
+  }
+  .obs-btn span.text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .obs-btn.has-obs { color: #1d4ed8; font-weight: 500; }
+  .menu-btn {
+    background: transparent;
+    border: none;
+    color: var(--gray);
+    font-size: 18px;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 6px;
+    line-height: 1;
+  }
+  .menu-btn:active { background: var(--bg); }
 
   /* FAB */
   .fab { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); width: 56px; height: 56px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 24px; box-shadow: 0 4px 12px rgba(30,58,138,0.4); z-index: 50; display: flex; align-items: center; justify-content: center; }
@@ -82,14 +178,6 @@
   .sheet-body { padding: 16px 20px; overflow-y: auto; flex: 1; }
   .form-group { margin-bottom: 18px; }
   .form-label { display: block; font-size: 13px; font-weight: 600; color: var(--gray); margin-bottom: 8px; text-transform: uppercase; }
-  .status-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-  .status-option { padding: 12px; border: 2px solid var(--border); border-radius: 10px; background: white; font-size: 13px; font-weight: 600; color: var(--gray); cursor: pointer; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-  .status-option .icon { font-size: 20px; }
-  .status-option.selected { border-color: var(--primary); background: #eff6ff; color: var(--primary); }
-  .status-option[data-value="aberta"].selected { border-color: var(--success); background:#f0fdf4; color:#15803d; }
-  .status-option[data-value="fechada"].selected { border-color: var(--danger); background:#fef2f2; color:#b91c1c; }
-  .status-option[data-value="tapume"].selected { border-color: var(--warning); background:#fffbeb; color:#b45309; }
-  .status-option[data-value="nova"].selected { border-color: var(--primary-light); background:#eff6ff; color:#1d4ed8; }
   input, textarea, select { width: 100%; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 16px; font-family: inherit; background: white; color: var(--text); outline: none; transition: border-color 0.15s; }
   input:focus, textarea:focus, select:focus { border-color: var(--primary-light); }
   textarea { resize: vertical; min-height: 70px; }
@@ -99,12 +187,23 @@
   .btn-primary { background: var(--primary); color: white; }
   .btn-danger { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
   .btn:active { opacity: 0.85; }
-  .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  /* Menu de ações */
+  .menu-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px; border-radius: 10px; cursor: pointer;
+    font-size: 15px; color: var(--text);
+    transition: background 0.15s;
+  }
+  .menu-item:active { background: var(--bg); }
+  .menu-item .emoji { font-size: 20px; width: 24px; text-align: center; }
+  .menu-item.danger { color: var(--danger); }
 
   /* ESTADOS */
   .empty-state { text-align: center; padding: 60px 20px; color: var(--gray); }
   .empty-state .icon { font-size: 48px; margin-bottom: 12px; opacity: 0.4; }
-  .section-title { font-size: 12px; font-weight: 700; color: var(--gray); text-transform: uppercase; margin: 4px 0 10px 4px; }
+  .section-title { font-size: 12px; font-weight: 700; color: var(--gray); text-transform: uppercase; margin: 4px 0 10px 4px; display: flex; justify-content: space-between; align-items: center; }
+  .section-title .resumo-inline { font-size: 10px; color: var(--gray); text-transform: none; letter-spacing: 0; font-weight: 500; }
 
   /* CÓPIA */
   .copy-banner { background: linear-gradient(135deg, #fef3c7, #fde68a); border: 1px solid #f59e0b; border-radius: var(--radius); padding: 14px; margin-bottom: 12px; display: none; }
@@ -128,14 +227,13 @@
   .sync-status.show { opacity: 1; }
   .sync-status.erro { background: rgba(220,38,38,0.95); }
 
-  /* AÇÕES EXTRAS */
   .action-row { display: flex; gap: 8px; margin-top: 16px; }
   .action-row .btn { padding: 10px; font-size: 13px; }
 </style>
 </head>
 <body>
 
-<!-- ===================== TELA DE LOGIN ===================== -->
+<!-- LOGIN -->
 <div class="login-screen" id="loginScreen">
   <div class="login-card">
     <div class="login-logo">🏬</div>
@@ -154,7 +252,7 @@
   </div>
 </div>
 
-<!-- ===================== HEADER ===================== -->
+<!-- HEADER -->
 <header id="appHeader" style="display:none;">
   <div class="header-top">
     <div>
@@ -172,10 +270,10 @@
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
 </header>
 
-<!-- ===================== NAVEGAÇÃO DE PISOS ===================== -->
+<!-- NAVEGAÇÃO DE PISOS -->
 <nav class="floor-nav" id="floorNav" style="display:none;"></nav>
 
-<!-- ===================== CONTEÚDO ===================== -->
+<!-- CONTEÚDO -->
 <main id="appMain" style="display:none;">
   <div class="copy-banner" id="copyBanner">
     <div class="copy-banner-title">📋 Roteiro do mês anterior disponível</div>
@@ -185,7 +283,10 @@
       <button class="btn btn-copy" onclick="abrirResumoCopia()">Copiar roteiro</button>
     </div>
   </div>
-  <div class="section-title" id="sectionTitle">Lojas do piso</div>
+  <div class="section-title">
+    <span id="sectionTitle">Lojas do piso</span>
+    <span class="resumo-inline" id="sectionResumo"></span>
+  </div>
   <div class="store-list" id="storeList"></div>
 </main>
 
@@ -193,54 +294,83 @@
 <div class="overlay" id="overlay"></div>
 <div class="sync-status" id="syncStatus">Salvando...</div>
 
-<!-- ===================== SHEET: EDITAR LOJA ===================== -->
+<!-- SHEET: OBSERVAÇÃO -->
+<div class="sheet" id="sheetObs">
+  <div class="sheet-handle"></div>
+  <div class="sheet-header">
+    <div class="sheet-title" id="obsTitulo">Observação</div>
+    <div class="sheet-subtitle">Registre informações sobre esta loja</div>
+  </div>
+  <div class="sheet-body">
+    <input type="hidden" id="obsLojaId">
+    <div class="form-group">
+      <label class="form-label" for="obsTexto">Observação</label>
+      <textarea id="obsTexto" placeholder="Ex: Fechada para reforma, previsão de reabertura em março..." rows="5"></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="obsData">Data</label>
+      <input type="date" id="obsData">
+    </div>
+  </div>
+  <div class="sheet-footer">
+    <button class="btn btn-secondary" onclick="fecharSheets()">Cancelar</button>
+    <button class="btn btn-primary" id="btnSalvarObs">Salvar</button>
+  </div>
+</div>
+
+<!-- SHEET: MENU DE AÇÕES -->
+<div class="sheet" id="sheetMenu">
+  <div class="sheet-handle"></div>
+  <div class="sheet-header">
+    <div class="sheet-title" id="menuTitulo">Opções</div>
+    <div class="sheet-subtitle" id="menuSubtitulo">—</div>
+  </div>
+  <div class="sheet-body" style="padding: 8px 12px;">
+    <div class="menu-item" onclick="editarNomeNumero()">
+      <span class="emoji">✏️</span> Editar número e nome
+    </div>
+    <div class="menu-item" onclick="limparStatusLoja()">
+      <span class="emoji">↺</span> Limpar status (voltar a pendente)
+    </div>
+    <div class="menu-item danger" onclick="excluirLojaDoMes()">
+      <span class="emoji">🗑</span> Excluir do roteiro deste mês
+    </div>
+  </div>
+  <div class="sheet-footer">
+    <button class="btn btn-secondary" onclick="fecharSheets()">Fechar</button>
+  </div>
+</div>
+
+<!-- SHEET: EDITAR NÚMERO/NOME -->
 <div class="sheet" id="sheetEditar">
   <div class="sheet-handle"></div>
   <div class="sheet-header">
-    <div class="sheet-title" id="sheetTitulo">Loja</div>
-    <div class="sheet-subtitle" id="sheetSubtitulo">Selecione o status</div>
+    <div class="sheet-title">Editar loja</div>
+    <div class="sheet-subtitle">Número e nome</div>
   </div>
   <div class="sheet-body">
     <input type="hidden" id="editLojaId">
     <div class="form-group">
-      <label class="form-label">Status da vistoria</label>
-      <div class="status-options" id="statusOptions">
-        <button type="button" class="status-option" data-value="aberta"><span class="icon">✅</span> Aberta</button>
-        <button type="button" class="status-option" data-value="fechada"><span class="icon">❌</span> Fechada</button>
-        <button type="button" class="status-option" data-value="tapume"><span class="icon">🚧</span> Tapume</button>
-        <button type="button" class="status-option" data-value="nova"><span class="icon">🆕</span> Nova loja</button>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="editNumero">Número da loja</label>
+      <label class="form-label" for="editNumero">Número</label>
       <input type="text" id="editNumero" placeholder="Ex: 105">
     </div>
     <div class="form-group">
-      <label class="form-label" for="editNome">Nome atual da loja</label>
-      <input type="text" id="editNome" placeholder="Ex: Renner, C&A, Vaga...">
+      <label class="form-label" for="editNome">Nome</label>
+      <input type="text" id="editNome" placeholder="Ex: Renner / Vaga / Tapume">
     </div>
-    <div class="form-group">
-      <label class="form-label" for="editObservacao">Observações</label>
-      <textarea id="editObservacao" placeholder="Ex: Fechada para reforma..."></textarea>
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="editData">Data da vistoria</label>
-      <input type="date" id="editData">
-    </div>
-    <button class="btn btn-danger" id="btnExcluirLoja" style="width:100%; margin-top:8px;">🗑 Excluir esta loja do roteiro</button>
   </div>
   <div class="sheet-footer">
-    <button class="btn btn-secondary" id="btnCancelar">Cancelar</button>
-    <button class="btn btn-primary" id="btnSalvar">Salvar</button>
+    <button class="btn btn-secondary" onclick="fecharSheets()">Cancelar</button>
+    <button class="btn btn-primary" id="btnSalvarEdit">Salvar</button>
   </div>
 </div>
 
-<!-- ===================== SHEET: ADICIONAR LOJA ===================== -->
+<!-- SHEET: ADICIONAR LOJA -->
 <div class="sheet" id="sheetAdicionar">
   <div class="sheet-handle"></div>
   <div class="sheet-header">
     <div class="sheet-title">Nova loja / vaga</div>
-    <div class="sheet-subtitle">Cadastrar no roteiro</div>
+    <div class="sheet-subtitle">Cadastrar no roteiro deste mês</div>
   </div>
   <div class="sheet-body">
     <div class="form-group"><label class="form-label" for="addNumero">Número da loja</label><input type="text" id="addNumero" placeholder="Ex: 105"></div>
@@ -256,12 +386,12 @@
     </div>
   </div>
   <div class="sheet-footer">
-    <button class="btn btn-secondary" id="btnCancelarAdd">Cancelar</button>
+    <button class="btn btn-secondary" onclick="fecharSheets()">Cancelar</button>
     <button class="btn btn-primary" id="btnSalvarAdd">Adicionar</button>
   </div>
 </div>
 
-<!-- ===================== SHEET: SELETOR DE MÊS ===================== -->
+<!-- SHEET: SELETOR DE MÊS -->
 <div class="sheet" id="sheetMes">
   <div class="sheet-handle"></div>
   <div class="sheet-header"><div class="sheet-title">Selecionar mês</div><div class="sheet-subtitle">Navegue entre vistorias</div></div>
@@ -269,7 +399,7 @@
     <div class="form-group"><label class="form-label">Mês / ano</label><input type="month" id="inputMes"></div>
     <div id="listaMesesExistentes"></div>
     <div class="action-row">
-      <button class="btn btn-secondary" onclick="resetarRoteiroMes()">🔄 Resetar roteiro</button>
+      <button class="btn btn-secondary" onclick="resetarRoteiroMes()">🔄 Resetar roteiro deste mês</button>
     </div>
   </div>
   <div class="sheet-footer">
@@ -278,7 +408,7 @@
   </div>
 </div>
 
-<!-- ===================== SHEET: RESUMO DA CÓPIA ===================== -->
+<!-- SHEET: RESUMO DA CÓPIA -->
 <div class="sheet" id="sheetResumoCopia">
   <div class="sheet-handle"></div>
   <div class="sheet-header"><div class="sheet-title">Resumo da cópia</div><div class="sheet-subtitle" id="resumoSubtitulo">—</div></div>
@@ -312,293 +442,86 @@ const db = getFirestore(app);
 const DOC_REF = doc(db, 'vistorias', 'shoppingCenter');
 
 // ========== ROTEIRO BASE (SEU ROTEIRO COMPLETO) ==========
-// Formato: { piso: [ { numero, nome }, ... ] }
 const ROTEIRO_BASE = {
   "Térreo": [
-    { numero:'101', nome:'Narciso Enxovais' },
-    { numero:'102', nome:'Vaga' },
-    { numero:'103', nome:'Vaga' },
-    { numero:'104', nome:'Vaga' },
-    { numero:'105', nome:'Americanas' },
-    { numero:'106', nome:'Universo dos Games' },
-    { numero:'107', nome:'Zumaz' },
-    { numero:'108', nome:'Criativa Brinquedos' },
-    { numero:'109', nome:'Johnny Joy' },
-    { numero:'110', nome:'Bella VIP' },
-    { numero:'111', nome:'Centro Cell' },
-    { numero:'112', nome:'Fri-Sabor' },
-    { numero:'113', nome:'Coffee Shop São Braz' },
-    { numero:'114', nome:'Vaga' },
-    { numero:'115', nome:'Timbushop' },
-    { numero:'116', nome:'Colchões Castor' },
-    { numero:'117', nome:'Farmácia Santa Maria' },
-    { numero:'118', nome:'First Class' },
-    { numero:'119', nome:'Claro' },
-    { numero:'120', nome:'Rommanel' },
-    { numero:'121', nome:'Browbar / Depilway' },
-    { numero:'122', nome:'CVC' },
-    { numero:'123', nome:'JDL Celulares' },
-    { numero:'124', nome:'Chiquinho Sorvetes' },
-    { numero:'125', nome:'Vaga' },
-    { numero:'126', nome:'Le Biscuit' },
-    { numero:'127', nome:'Vivo' },
-    { numero:'128', nome:'Bessie Beauty Club' },
-    { numero:'129', nome:'Mundo das Vitaminas' },
-    { numero:'130', nome:'Centauro' },
-    { numero:'131', nome:'Vonny Cosméticos' },
-    { numero:'132', nome:'Vaga' },
-    { numero:'133', nome:'Vaga' },
-    { numero:'134', nome:'Vaga' },
-    { numero:'135', nome:'Vaga' },
-    { numero:'136', nome:'Vaga' },
-    { numero:'137', nome:'Casa do Celular' },
-    { numero:'138', nome:'Íris Semijoias' },
-    { numero:'139', nome:'Reparus' },
-    { numero:'140', nome:'Laser Eletro' },
-    { numero:'141', nome:'Aliança Colchões' },
-    { numero:'142', nome:'G&E Acessórios' },
-    { numero:'143', nome:'Unigames' },
-    { numero:'144', nome:'Ótica Liberty' },
-    { numero:'145', nome:'Zeiss' },
-    { numero:'146', nome:'Ótica Líder' },
-    { numero:'147', nome:'Colchões Ortobom' },
-    { numero:'148', nome:'Tim' },
-    { numero:'149', nome:'Ótica Chilli Beans' },
-    { numero:'150', nome:'Espaço Laser' },
-    { numero:'151', nome:'World Technology' },
-    { numero:'152', nome:'Vaga' },
-    { numero:'153', nome:'Vaga' },
-    { numero:'154', nome:'Óticas Carol' },
-    { numero:'155', nome:'Drogaria São Paulo' },
-    { numero:'156', nome:'Mundo do Cabeleireiro' },
-    { numero:'157', nome:'Oculum' },
-    { numero:'158', nome:'Mundo do Cabeleireiro' },
-    { numero:'159', nome:'Linda Semijoias e Acessórios' },
-    { numero:'160', nome:'SOS Relógios' },
-    { numero:'161', nome:'Lajoya' },
-    { numero:'162', nome:'Club da Miçanga & Cia da Montagem' },
-    { numero:'163', nome:'Millena Móveis' },
-    { numero:'164', nome:'World Tennis' },
-    { numero:'165', nome:'Vaga' },
-    { numero:'166', nome:'Vaga' },
-    { numero:'167', nome:'Millena Móveis' },
-    { numero:'168', nome:'Drogaria São Paulo' }
+    { numero:'101', nome:'Narciso Enxovais' }, { numero:'102', nome:'Vaga' }, { numero:'103', nome:'Vaga' }, { numero:'104', nome:'Vaga' },
+    { numero:'105', nome:'Americanas' }, { numero:'106', nome:'Universo dos Games' }, { numero:'107', nome:'Zumaz' }, { numero:'108', nome:'Criativa Brinquedos' },
+    { numero:'109', nome:'Johnny Joy' }, { numero:'110', nome:'Bella VIP' }, { numero:'111', nome:'Centro Cell' }, { numero:'112', nome:'Fri-Sabor' },
+    { numero:'113', nome:'Coffee Shop São Braz' }, { numero:'114', nome:'Vaga' }, { numero:'115', nome:'Timbushop' }, { numero:'116', nome:'Colchões Castor' },
+    { numero:'117', nome:'Farmácia Santa Maria' }, { numero:'118', nome:'First Class' }, { numero:'119', nome:'Claro' }, { numero:'120', nome:'Rommanel' },
+    { numero:'121', nome:'Browbar / Depilway' }, { numero:'122', nome:'CVC' }, { numero:'123', nome:'JDL Celulares' }, { numero:'124', nome:'Chiquinho Sorvetes' },
+    { numero:'125', nome:'Vaga' }, { numero:'126', nome:'Le Biscuit' }, { numero:'127', nome:'Vivo' }, { numero:'128', nome:'Bessie Beauty Club' },
+    { numero:'129', nome:'Mundo das Vitaminas' }, { numero:'130', nome:'Centauro' }, { numero:'131', nome:'Vonny Cosméticos' }, { numero:'132', nome:'Vaga' },
+    { numero:'133', nome:'Vaga' }, { numero:'134', nome:'Vaga' }, { numero:'135', nome:'Vaga' }, { numero:'136', nome:'Vaga' },
+    { numero:'137', nome:'Casa do Celular' }, { numero:'138', nome:'Íris Semijoias' }, { numero:'139', nome:'Reparus' }, { numero:'140', nome:'Laser Eletro' },
+    { numero:'141', nome:'Aliança Colchões' }, { numero:'142', nome:'G&E Acessórios' }, { numero:'143', nome:'Unigames' }, { numero:'144', nome:'Ótica Liberty' },
+    { numero:'145', nome:'Zeiss' }, { numero:'146', nome:'Ótica Líder' }, { numero:'147', nome:'Colchões Ortobom' }, { numero:'148', nome:'Tim' },
+    { numero:'149', nome:'Ótica Chilli Beans' }, { numero:'150', nome:'Espaço Laser' }, { numero:'151', nome:'World Technology' }, { numero:'152', nome:'Vaga' },
+    { numero:'153', nome:'Vaga' }, { numero:'154', nome:'Óticas Carol' }, { numero:'155', nome:'Drogaria São Paulo' }, { numero:'156', nome:'Mundo do Cabeleireiro' },
+    { numero:'157', nome:'Oculum' }, { numero:'158', nome:'Mundo do Cabeleireiro' }, { numero:'159', nome:'Linda Semijoias e Acessórios' }, { numero:'160', nome:'SOS Relógios' },
+    { numero:'161', nome:'Lajoya' }, { numero:'162', nome:'Club da Miçanga & Cia da Montagem' }, { numero:'163', nome:'Millena Móveis' }, { numero:'164', nome:'World Tennis' },
+    { numero:'165', nome:'Vaga' }, { numero:'166', nome:'Vaga' }, { numero:'167', nome:'Millena Móveis' }, { numero:'168', nome:'Drogaria São Paulo' }
   ],
   "L1": [
-    { numero:'201', nome:'Riachuelo' },
-    { numero:'202', nome:'Vaga' },
-    { numero:'203', nome:'Vaga Oficina de Slimes' },
-    { numero:'204', nome:'Kid Stok' },
-    { numero:'205', nome:'Danilas Semijoias' },
-    { numero:'206', nome:'C&A' },
-    { numero:'207', nome:'Vaga' },
-    { numero:'208', nome:'Ótica Capibaribe' },
-    { numero:'209', nome:'Prata Rara' },
-    { numero:'210', nome:'Vaga' },
-    { numero:'211', nome:'Vaga' },
-    { numero:'212', nome:'Diva' },
-    { numero:'213', nome:'Nel Blu' },
-    { numero:'214', nome:'Farmácia Pague Menos' },
-    { numero:'215', nome:'La Camiceria' },
-    { numero:'216', nome:'Taco' },
-    { numero:'217', nome:'Vaga' },
-    { numero:'218', nome:'Vaga' },
-    { numero:'219', nome:'Vaga' },
-    { numero:'220', nome:'Vaga' },
-    { numero:'221', nome:'Vaga' },
-    { numero:'222', nome:'Vaga' },
-    { numero:'223', nome:'Vaga' },
-    { numero:'224', nome:'Kalunga' },
-    { numero:'225', nome:'Espaço Massagem - Pop Up' },
-    { numero:'226', nome:'Magazine Luiza' },
-    { numero:'227', nome:'Esposende' },
-    { numero:'228', nome:'Avenida' },
-    { numero:'229', nome:'Vaga' },
-    { numero:'230', nome:'Renner' },
-    { numero:'231', nome:'Curinga Celular' },
-    { numero:'232', nome:'Duobrow - Studio de Beleza' },
-    { numero:'233', nome:'Figueiras Calçados' },
-    { numero:'234', nome:'Vaga' },
-    { numero:'235', nome:'Vaga' },
-    { numero:'236', nome:'Vaga' },
-    { numero:'237', nome:'Mundo Verde' },
-    { numero:'238', nome:'Banco Bradesco' },
-    { numero:'239', nome:'Cama Decor' },
-    { numero:'240', nome:'Top Plush' },
-    { numero:'241', nome:'Vaga' },
-    { numero:'242', nome:'Vaga' },
-    { numero:'243', nome:'Cia do Terno' },
-    { numero:'244', nome:'Via Stillus' },
-    { numero:'245', nome:'Di Santinni' },
-    { numero:'246', nome:'Cristine' },
-    { numero:'247', nome:'Vaga' },
-    { numero:'248', nome:'Soff' },
-    { numero:'249', nome:'Vagamundo' },
-    { numero:'250', nome:'Vaga' },
-    { numero:'251', nome:'Vaga' },
-    { numero:'252', nome:'Polo Club England' },
-    { numero:'253', nome:'All Pé' },
-    { numero:'254', nome:'Via Laser' },
-    { numero:'255', nome:'Vaga' },
-    { numero:'256', nome:'Vaga' },
-    { numero:'257', nome:'Pharmapele' },
-    { numero:'258', nome:'Vaga' },
-    { numero:'259', nome:'Diorne' },
-    { numero:'260', nome:'Natura' },
-    { numero:'261', nome:'Usaflex' },
-    { numero:'262', nome:'Dwz' },
-    { numero:'263', nome:'Lupo' },
-    { numero:'264', nome:'Boticário' },
-    { numero:'265', nome:'IPlace Mobile' },
-    { numero:'266', nome:'Blanche' },
-    { numero:'267', nome:'Spuk' },
-    { numero:'268', nome:'Clube Melissa' },
-    { numero:'269', nome:'Vivara' },
-    { numero:'270', nome:'Rota\'s Makeup' },
-    { numero:'271', nome:'Vaga' },
-    { numero:'272', nome:'Arena Fit' },
-    { numero:'273', nome:'Hering' },
-    { numero:'274', nome:'Vaga' },
-    { numero:'275', nome:'Tropical' },
-    { numero:'276', nome:'Di Farias Atelier' },
-    { numero:'277', nome:'Lets Make' },
-    { numero:'278', nome:'Mr. Black Café' },
-    { numero:'279', nome:'Vaga' }
+    { numero:'201', nome:'Riachuelo' }, { numero:'202', nome:'Vaga' }, { numero:'203', nome:'Vaga Oficina de Slimes' }, { numero:'204', nome:'Kid Stok' },
+    { numero:'205', nome:'Danilas Semijoias' }, { numero:'206', nome:'C&A' }, { numero:'207', nome:'Vaga' }, { numero:'208', nome:'Ótica Capibaribe' },
+    { numero:'209', nome:'Prata Rara' }, { numero:'210', nome:'Vaga' }, { numero:'211', nome:'Vaga' }, { numero:'212', nome:'Diva' },
+    { numero:'213', nome:'Nel Blu' }, { numero:'214', nome:'Farmácia Pague Menos' }, { numero:'215', nome:'La Camiceria' }, { numero:'216', nome:'Taco' },
+    { numero:'217', nome:'Vaga' }, { numero:'218', nome:'Vaga' }, { numero:'219', nome:'Vaga' }, { numero:'220', nome:'Vaga' },
+    { numero:'221', nome:'Vaga' }, { numero:'222', nome:'Vaga' }, { numero:'223', nome:'Vaga' }, { numero:'224', nome:'Kalunga' },
+    { numero:'225', nome:'Espaço Massagem - Pop Up' }, { numero:'226', nome:'Magazine Luiza' }, { numero:'227', nome:'Esposende' }, { numero:'228', nome:'Avenida' },
+    { numero:'229', nome:'Vaga' }, { numero:'230', nome:'Renner' }, { numero:'231', nome:'Curinga Celular' }, { numero:'232', nome:'Duobrow - Studio de Beleza' },
+    { numero:'233', nome:'Figueiras Calçados' }, { numero:'234', nome:'Vaga' }, { numero:'235', nome:'Vaga' }, { numero:'236', nome:'Vaga' },
+    { numero:'237', nome:'Mundo Verde' }, { numero:'238', nome:'Banco Bradesco' }, { numero:'239', nome:'Cama Decor' }, { numero:'240', nome:'Top Plush' },
+    { numero:'241', nome:'Vaga' }, { numero:'242', nome:'Vaga' }, { numero:'243', nome:'Cia do Terno' }, { numero:'244', nome:'Via Stillus' },
+    { numero:'245', nome:'Di Santinni' }, { numero:'246', nome:'Cristine' }, { numero:'247', nome:'Vaga' }, { numero:'248', nome:'Soff' },
+    { numero:'249', nome:'Vagamundo' }, { numero:'250', nome:'Vaga' }, { numero:'251', nome:'Vaga' }, { numero:'252', nome:'Polo Club England' },
+    { numero:'253', nome:'All Pé' }, { numero:'254', nome:'Via Laser' }, { numero:'255', nome:'Vaga' }, { numero:'256', nome:'Vaga' },
+    { numero:'257', nome:'Pharmapele' }, { numero:'258', nome:'Vaga' }, { numero:'259', nome:'Diorne' }, { numero:'260', nome:'Natura' },
+    { numero:'261', nome:'Usaflex' }, { numero:'262', nome:'Dwz' }, { numero:'263', nome:'Lupo' }, { numero:'264', nome:'Boticário' },
+    { numero:'265', nome:'IPlace Mobile' }, { numero:'266', nome:'Blanche' }, { numero:'267', nome:'Spuk' }, { numero:'268', nome:'Clube Melissa' },
+    { numero:'269', nome:'Vivara' }, { numero:'270', nome:"Rota's Makeup" }, { numero:'271', nome:'Vaga' }, { numero:'272', nome:'Arena Fit' },
+    { numero:'273', nome:'Hering' }, { numero:'274', nome:'Vaga' }, { numero:'275', nome:'Tropical' }, { numero:'276', nome:'Di Farias Atelier' },
+    { numero:'277', nome:'Lets Make' }, { numero:'278', nome:'Mr. Black Café' }, { numero:'279', nome:'Vaga' }
   ],
   "L2": [
-    { numero:'301', nome:'Riachuelo' },
-    { numero:'302', nome:'Espaço Olinda' },
-    { numero:'303', nome:'Vaga' },
-    { numero:'304', nome:'Vaga' },
-    { numero:'305', nome:'C&A' },
-    { numero:'306', nome:'Vaga' },
-    { numero:'307', nome:'Vaga' },
-    { numero:'308', nome:'Vaga' },
-    { numero:'309', nome:'Nova Foco' },
-    { numero:'310', nome:'Vaga' },
-    { numero:'311', nome:'Vaga' },
-    { numero:'312', nome:'Vaga' },
-    { numero:'313', nome:'Cyclone' },
-    { numero:'314', nome:'Sonho dos Pés' },
-    { numero:'315', nome:'Constance' },
-    { numero:'316', nome:'Santa Lolla' },
-    { numero:'317', nome:'Via Mia' },
-    { numero:'318', nome:'Via Sol' },
-    { numero:'319', nome:'Vaga' },
-    { numero:'320', nome:'Bagaggio' },
-    { numero:'321', nome:'Divino Barbearia' },
-    { numero:'322', nome:'Cacau Show' },
-    { numero:'323', nome:'Cheirin Bão' },
-    { numero:'324', nome:'Vaga' },
-    { numero:'325', nome:'Studio Z' },
-    { numero:'326', nome:'Caixa Econômica Federal' },
-    { numero:'327', nome:'Ri Happy' },
-    { numero:'328', nome:'Renner' },
-    { numero:'329', nome:'Vaga' },
-    { numero:'330', nome:'Salti Verso' },
-    { numero:'331', nome:'Vaga' },
-    { numero:'332', nome:'Vaga' },
-    { numero:'333', nome:'San Paolo' },
-    { numero:'334', nome:'Vaga' },
-    { numero:'335', nome:'Dinossauro Discos' },
-    { numero:'336', nome:'Vaga - Import Brink' },
-    { numero:'337', nome:'Caixas Eletrônicos - Banco 24 Horas' },
-    { numero:'338', nome:'Vaga' },
-    { numero:'339', nome:'Vaga' },
-    { numero:'340', nome:'Vaga' },
-    { numero:'341', nome:'Vaga' },
-    { numero:'342', nome:'Vaga' },
-    { numero:'343', nome:'Vaga' },
-    { numero:'344', nome:'Vaga' },
-    { numero:'345', nome:'Vaga' },
-    { numero:'346', nome:'Arezzo' },
-    { numero:'347', nome:'Belle Accessoires' },
-    { numero:'348', nome:'Havaianas' },
-    { numero:'349', nome:'Vaga' },
-    { numero:'350', nome:'Bali' },
-    { numero:'351', nome:'Espaço Cultural - Pop Up' },
-    { numero:'352', nome:'Vaga' },
-    { numero:'353', nome:'Damyller' },
-    { numero:'354', nome:'Kinitos' },
-    { numero:'355', nome:'Joan Shoes' },
-    { numero:'356', nome:'Lalelilo' },
-    { numero:'357', nome:'Estoque' },
-    { numero:'358', nome:'Vaga' },
-    { numero:'359', nome:'Seaway' },
-    { numero:'360', nome:'Vaga' },
-    { numero:'361', nome:'Vaga - Eu Amo Ler' },
-    { numero:'362', nome:'Kinitos' },
-    { numero:'363', nome:'Vaga' },
-    { numero:'364', nome:'Vaga' },
-    { numero:'365', nome:'Morana' },
-    { numero:'366', nome:'Mr. Cheney' }
+    { numero:'301', nome:'Riachuelo' }, { numero:'302', nome:'Espaço Olinda' }, { numero:'303', nome:'Vaga' }, { numero:'304', nome:'Vaga' },
+    { numero:'305', nome:'C&A' }, { numero:'306', nome:'Vaga' }, { numero:'307', nome:'Vaga' }, { numero:'308', nome:'Vaga' },
+    { numero:'309', nome:'Nova Foco' }, { numero:'310', nome:'Vaga' }, { numero:'311', nome:'Vaga' }, { numero:'312', nome:'Vaga' },
+    { numero:'313', nome:'Cyclone' }, { numero:'314', nome:'Sonho dos Pés' }, { numero:'315', nome:'Constance' }, { numero:'316', nome:'Santa Lolla' },
+    { numero:'317', nome:'Via Mia' }, { numero:'318', nome:'Via Sol' }, { numero:'319', nome:'Vaga' }, { numero:'320', nome:'Bagaggio' },
+    { numero:'321', nome:'Divino Barbearia' }, { numero:'322', nome:'Cacau Show' }, { numero:'323', nome:'Cheirin Bão' }, { numero:'324', nome:'Vaga' },
+    { numero:'325', nome:'Studio Z' }, { numero:'326', nome:'Caixa Econômica Federal' }, { numero:'327', nome:'Ri Happy' }, { numero:'328', nome:'Renner' },
+    { numero:'329', nome:'Vaga' }, { numero:'330', nome:'Salti Verso' }, { numero:'331', nome:'Vaga' }, { numero:'332', nome:'Vaga' },
+    { numero:'333', nome:'San Paolo' }, { numero:'334', nome:'Vaga' }, { numero:'335', nome:'Dinossauro Discos' }, { numero:'336', nome:'Vaga - Import Brink' },
+    { numero:'337', nome:'Caixas Eletrônicos - Banco 24 Horas' }, { numero:'338', nome:'Vaga' }, { numero:'339', nome:'Vaga' }, { numero:'340', nome:'Vaga' },
+    { numero:'341', nome:'Vaga' }, { numero:'342', nome:'Vaga' }, { numero:'343', nome:'Vaga' }, { numero:'344', nome:'Vaga' },
+    { numero:'345', nome:'Vaga' }, { numero:'346', nome:'Arezzo' }, { numero:'347', nome:'Belle Accessoires' }, { numero:'348', nome:'Havaianas' },
+    { numero:'349', nome:'Vaga' }, { numero:'350', nome:'Bali' }, { numero:'351', nome:'Espaço Cultural - Pop Up' }, { numero:'352', nome:'Vaga' },
+    { numero:'353', nome:'Damyller' }, { numero:'354', nome:'Kinitos' }, { numero:'355', nome:'Joan Shoes' }, { numero:'356', nome:'Lalelilo' },
+    { numero:'357', nome:'Estoque' }, { numero:'358', nome:'Vaga' }, { numero:'359', nome:'Seaway' }, { numero:'360', nome:'Vaga' },
+    { numero:'361', nome:'Vaga - Eu Amo Ler' }, { numero:'362', nome:'Kinitos' }, { numero:'363', nome:'Vaga' }, { numero:'364', nome:'Vaga' },
+    { numero:'365', nome:'Morana' }, { numero:'366', nome:'Mr. Cheney' }
   ],
   "L3": [
-    { numero:'401', nome:'Livraria Leitura' },
-    { numero:'402', nome:'Montana Airsoft' },
-    { numero:'403', nome:'Tapume - Paço Real' },
-    { numero:'404', nome:'Game Station' },
-    { numero:'405', nome:'Smart Fit' },
-    { numero:'406', nome:'Subway' },
-    { numero:'407', nome:'Tapume - Minikalzone' },
-    { numero:'408', nome:'Giraffas' },
-    { numero:'409', nome:'Juliet\'s Doces e Salgados' },
-    { numero:'410', nome:'Don Pastello' },
-    { numero:'411', nome:'Fred Chicken' },
-    { numero:'412', nome:'Vaga' },
-    { numero:'413', nome:'Mc Donalds' },
-    { numero:'414', nome:'Cinépolis' },
-    { numero:'415', nome:'Milky Moo' },
-    { numero:'416', nome:'Julietto Festa' },
-    { numero:'417', nome:'Donatário' },
-    { numero:'418', nome:'KFC' },
-    { numero:'419', nome:'Capilé' },
-    { numero:'420', nome:'Redbake' },
-    { numero:'421', nome:'Dinny' },
-    { numero:'422', nome:'Tempero da Fazenda' },
-    { numero:'423', nome:'Vaga' },
-    { numero:'424', nome:'Vaga' },
-    { numero:'425', nome:'Vaga' },
-    { numero:'426', nome:'Habib\'s' },
-    { numero:'427', nome:'Pastel Mania' },
-    { numero:'428', nome:'Bob\'s' },
-    { numero:'429', nome:'Iang Chao' },
-    { numero:'430', nome:'Sal e Brasa' },
-    { numero:'431', nome:'Burger King' },
-    { numero:'432', nome:'Vaga' },
-    { numero:'433', nome:'Vaga' },
-    { numero:'434', nome:'Vaga' }
+    { numero:'401', nome:'Livraria Leitura' }, { numero:'402', nome:'Montana Airsoft' }, { numero:'403', nome:'Tapume - Paço Real' }, { numero:'404', nome:'Game Station' },
+    { numero:'405', nome:'Smart Fit' }, { numero:'406', nome:'Subway' }, { numero:'407', nome:'Tapume - Minikalzone' }, { numero:'408', nome:'Giraffas' },
+    { numero:'409', nome:"Juliet's Doces e Salgados" }, { numero:'410', nome:'Don Pastello' }, { numero:'411', nome:'Fred Chicken' }, { numero:'412', nome:'Vaga' },
+    { numero:'413', nome:'Mc Donalds' }, { numero:'414', nome:'Cinépolis' }, { numero:'415', nome:'Milky Moo' }, { numero:'416', nome:'Julietto Festa' },
+    { numero:'417', nome:'Donatário' }, { numero:'418', nome:'KFC' }, { numero:'419', nome:'Capilé' }, { numero:'420', nome:'Redbake' },
+    { numero:'421', nome:'Dinny' }, { numero:'422', nome:'Tempero da Fazenda' }, { numero:'423', nome:'Vaga' }, { numero:'424', nome:'Vaga' },
+    { numero:'425', nome:'Vaga' }, { numero:'426', nome:"Habib's" }, { numero:'427', nome:'Pastel Mania' }, { numero:'428', nome:"Bob's" },
+    { numero:'429', nome:'Iang Chao' }, { numero:'430', nome:'Sal e Brasa' }, { numero:'431', nome:'Burger King' }, { numero:'432', nome:'Vaga' },
+    { numero:'433', nome:'Vaga' }, { numero:'434', nome:'Vaga' }
   ],
   "L4": [
-    { numero:'501', nome:'Cinépolis Vip' },
-    { numero:'502', nome:'Uninassau' },
-    { numero:'503', nome:'Fight House' },
-    { numero:'504', nome:'Vaga' },
-    { numero:'505', nome:'Neoenergia' },
-    { numero:'506', nome:'Wizard Brasil' },
-    { numero:'507', nome:'Vaga' },
-    { numero:'508', nome:'Vaga' },
-    { numero:'509', nome:'Vaga' },
-    { numero:'510', nome:'Vaccine' },
-    { numero:'511', nome:'Accept Saúde' },
-    { numero:'512', nome:'Espaço Massagem' },
-    { numero:'513', nome:'Accept Saúde II' },
-    { numero:'514', nome:'Expresso Cidadão' },
-    { numero:'515', nome:'Esperança Consultório' },
-    { numero:'516', nome:'Tapume - Cartório Rita Rangel' },
-    { numero:'517', nome:'Boris Berenstein' },
-    { numero:'518', nome:'Hope' },
-    { numero:'519', nome:'Tapume - Studio Arquitetura Criativa' },
-    { numero:'520', nome:'Nova Placa' },
-    { numero:'521', nome:'Infinity Consumidor' },
-    { numero:'522', nome:'Go Service' },
-    { numero:'523', nome:'Vaga' },
-    { numero:'524', nome:'Vaga' },
-    { numero:'525', nome:'Vaga' },
-    { numero:'526', nome:'Vaga' },
-    { numero:'527', nome:'Vaga' },
-    { numero:'528', nome:'Vaga' },
-    { numero:'529', nome:'Vaga' }
+    { numero:'501', nome:'Cinépolis Vip' }, { numero:'502', nome:'Uninassau' }, { numero:'503', nome:'Fight House' }, { numero:'504', nome:'Vaga' },
+    { numero:'505', nome:'Neoenergia' }, { numero:'506', nome:'Wizard Brasil' }, { numero:'507', nome:'Vaga' }, { numero:'508', nome:'Vaga' },
+    { numero:'509', nome:'Vaga' }, { numero:'510', nome:'Vaccine' }, { numero:'511', nome:'Accept Saúde' }, { numero:'512', nome:'Espaço Massagem' },
+    { numero:'513', nome:'Accept Saúde II' }, { numero:'514', nome:'Expresso Cidadão' }, { numero:'515', nome:'Esperança Consultório' }, { numero:'516', nome:'Tapume - Cartório Rita Rangel' },
+    { numero:'517', nome:'Boris Berenstein' }, { numero:'518', nome:'Hope' }, { numero:'519', nome:'Tapume - Studio Arquitetura Criativa' }, { numero:'520', nome:'Nova Placa' },
+    { numero:'521', nome:'Infinity Consumidor' }, { numero:'522', nome:'Go Service' }, { numero:'523', nome:'Vaga' }, { numero:'524', nome:'Vaga' },
+    { numero:'525', nome:'Vaga' }, { numero:'526', nome:'Vaga' }, { numero:'527', nome:'Vaga' }, { numero:'528', nome:'Vaga' }, { numero:'529', nome:'Vaga' }
   ]
 };
 
@@ -610,18 +533,14 @@ function nomeMesCurto(c) { const [a,n]=c.split('-'); return `${MESES_CURTO[parse
 function nomeMesLongo(c) { const [a,n]=c.split('-'); return `${MESES_LONGO[parseInt(n)-1]} ${a}`; }
 function gerarId() { return 'x' + Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
 function formatarData(iso) { if(!iso) return ''; const [a,m,d]=iso.split('-'); return `${d}/${m}`; }
+function hojeISO() { return new Date().toISOString().slice(0,10); }
 
-// Constrói um mês novo a partir do ROTEIRO_BASE
 function construirMesBase() {
   const mes = {};
   Object.keys(ROTEIRO_BASE).forEach(piso => {
     mes[piso] = ROTEIRO_BASE[piso].map(l => ({
-      id: gerarId(),
-      numero: l.numero,
-      nome: l.nome,
-      status: 'pendente',
-      obs: '',
-      data: ''
+      id: gerarId(), numero: l.numero, nome: l.nome,
+      status: 'pendente', obs: '', data: ''
     }));
   });
   return mes;
@@ -635,14 +554,13 @@ const ESTADO = {
   pronto: false
 };
 let mesAnteriorDetectado = null;
-let lojaEmEdicao = null;
+let lojaMenuAtual = null;
 let salvandoTimeout = null;
 
 // ========== LOGIN ==========
 const loginScreen = document.getElementById('loginScreen');
 const loginError = document.getElementById('loginError');
 const btnLogin = document.getElementById('btnLogin');
-
 function mostrarErroLogin(msg) { loginError.textContent = msg; loginError.classList.add('show'); }
 
 btnLogin.addEventListener('click', async () => {
@@ -655,28 +573,19 @@ btnLogin.addEventListener('click', async () => {
     await signInWithEmailAndPassword(auth, email, senha);
   } catch (e) {
     const msgs = {
-      'auth/invalid-email': 'E-mail inválido.',
-      'auth/user-not-found': 'Usuário não encontrado.',
-      'auth/wrong-password': 'Senha incorreta.',
-      'auth/invalid-credential': 'E-mail ou senha incorretos.',
+      'auth/invalid-email': 'E-mail inválido.', 'auth/user-not-found': 'Usuário não encontrado.',
+      'auth/wrong-password': 'Senha incorreta.', 'auth/invalid-credential': 'E-mail ou senha incorretos.',
       'auth/too-many-requests': 'Muitas tentativas. Tente em alguns minutos.',
       'auth/network-request-failed': 'Sem conexão com a internet.'
     };
     mostrarErroLogin(msgs[e.code] || 'Erro: ' + e.message);
-  } finally {
-    btnLogin.disabled = false; btnLogin.textContent = 'Entrar';
-  }
+  } finally { btnLogin.disabled = false; btnLogin.textContent = 'Entrar'; }
 });
 
-document.getElementById('loginSenha').addEventListener('keydown', e => {
-  if (e.key === 'Enter') btnLogin.click();
-});
+document.getElementById('loginSenha').addEventListener('keydown', e => { if (e.key === 'Enter') btnLogin.click(); });
+document.getElementById('btnLogout').addEventListener('click', async () => { if (confirm('Deseja sair?')) await signOut(auth); });
 
-document.getElementById('btnLogout').addEventListener('click', async () => {
-  if (confirm('Deseja sair?')) await signOut(auth);
-});
-
-// ========== OBSERVADOR DE AUTENTICAÇÃO ==========
+// ========== AUTH OBSERVER ==========
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     loginScreen.classList.add('hidden');
@@ -685,10 +594,7 @@ onAuthStateChanged(auth, async (user) => {
     document.getElementById('appMain').style.display = '';
     document.getElementById('fabAdd').style.display = '';
     document.getElementById('usuarioEmail').textContent = user.email || 'Usuário';
-    if (!ESTADO.pronto) {
-      await carregarDados();
-      ESTADO.pronto = true;
-    }
+    if (!ESTADO.pronto) { await carregarDados(); ESTADO.pronto = true; }
   } else {
     loginScreen.classList.remove('hidden');
     document.getElementById('appHeader').style.display = 'none';
@@ -707,21 +613,15 @@ async function carregarDados() {
     if (snap.exists()) {
       ESTADO.dados = snap.data() || {};
     } else {
-      // Primeira vez: cria com o roteiro base
       ESTADO.dados = {};
       ESTADO.dados[ESTADO.mesSelecionado] = construirMesBase();
       await salvarDados(true);
     }
-    // Garante que o mês atual existe
-    if (!ESTADO.dados[ESTADO.mesSelecionado]) {
-      ESTADO.dados[ESTADO.mesSelecionado] = construirMesBase();
-    }
-    // Garante que todos os pisos do roteiro base existem no mês atual
+    if (!ESTADO.dados[ESTADO.mesSelecionado]) ESTADO.dados[ESTADO.mesSelecionado] = construirMesBase();
     Object.keys(ROTEIRO_BASE).forEach(piso => {
       if (!ESTADO.dados[ESTADO.mesSelecionado][piso]) {
         ESTADO.dados[ESTADO.mesSelecionado][piso] = ROTEIRO_BASE[piso].map(l => ({
-          id: gerarId(), numero: l.numero, nome: l.nome,
-          status: 'pendente', obs: '', data: ''
+          id: gerarId(), numero: l.numero, nome: l.nome, status: 'pendente', obs: '', data: ''
         }));
       }
     });
@@ -735,9 +635,7 @@ async function carregarDados() {
       ESTADO.pisoSelecionado = Object.keys(ESTADO.dados[ESTADO.mesSelecionado] || {})[0];
       renderizarTudo();
       mostrarSync('Modo offline (cache local)', true);
-    } else {
-      alert('Erro ao carregar: ' + e.message);
-    }
+    } else { alert('Erro ao carregar: ' + e.message); }
   }
 }
 
@@ -755,11 +653,9 @@ async function salvarDados(silencioso = false) {
 
 function mostrarSync(msg, erro = false) {
   const el = document.getElementById('syncStatus');
-  el.textContent = msg;
-  el.classList.toggle('erro', erro);
-  el.classList.add('show');
+  el.textContent = msg; el.classList.toggle('erro', erro); el.classList.add('show');
   clearTimeout(salvandoTimeout);
-  salvandoTimeout = setTimeout(() => el.classList.remove('show'), 2000);
+  salvandoTimeout = setTimeout(() => el.classList.remove('show'), 1500);
 }
 
 // ========== RENDERIZAÇÃO ==========
@@ -769,7 +665,6 @@ function renderizarTudo() {
   renderizarLojas();
   atualizarProgresso();
   verificarMesAnterior();
-  document.getElementById('editData').valueAsDate = new Date();
 }
 
 function atualizarBadgeMes() {
@@ -779,29 +674,39 @@ function atualizarBadgeMes() {
 function renderizarPisos() {
   const nav = document.getElementById('floorNav');
   nav.innerHTML = '';
-  const pisos = Object.keys(ESTADO.dados[ESTADO.mesSelecionado] || {});
-  pisos.forEach(piso => {
+  Object.keys(ESTADO.dados[ESTADO.mesSelecionado] || {}).forEach(piso => {
     const lojas = ESTADO.dados[ESTADO.mesSelecionado][piso] || [];
     const pendentes = lojas.filter(l => l.status === 'pendente').length;
     const btn = document.createElement('button');
     btn.className = 'floor-btn' + (piso === ESTADO.pisoSelecionado ? ' active' : '');
     btn.innerHTML = `${piso} <span class="floor-count">${lojas.length - pendentes}/${lojas.length}</span>`;
-    btn.onclick = () => {
-      ESTADO.pisoSelecionado = piso;
-      renderizarPisos();
-      renderizarLojas();
-    };
+    btn.onclick = () => { ESTADO.pisoSelecionado = piso; renderizarPisos(); renderizarLojas(); };
     nav.appendChild(btn);
   });
 }
 
+const STATUS_MAP = {
+  aberta:  { label: 'Aberta',  ico: '✅' },
+  fechada: { label: 'Fechada', ico: '❌' },
+  tapume:  { label: 'Tapume',  ico: '🚧' },
+  nova:    { label: 'Nova',    ico: '🆕' }
+};
+
 function renderizarLojas() {
   const lista = document.getElementById('storeList');
   const titulo = document.getElementById('sectionTitle');
+  const resumo = document.getElementById('sectionResumo');
   const piso = ESTADO.pisoSelecionado;
   const lojas = ESTADO.dados[ESTADO.mesSelecionado]?.[piso] || [];
 
   titulo.textContent = `${piso} — ${lojas.length} loja(s)`;
+
+  // Resumo inline de status
+  if (lojas.length > 0) {
+    const count = { aberta:0, fechada:0, tapume:0, nova:0, pendente:0 };
+    lojas.forEach(l => { count[l.status] = (count[l.status] || 0) + 1; });
+    resumo.textContent = `✅${count.aberta} ❌${count.fechada} 🚧${count.tapume} 🆕${count.nova} ⏳${count.pendente}`;
+  } else { resumo.textContent = ''; }
 
   if (lojas.length === 0) {
     lista.innerHTML = `<div class="empty-state"><div class="icon">🏬</div><div>Nenhuma loja neste piso</div></div>`;
@@ -810,26 +715,125 @@ function renderizarLojas() {
 
   lista.innerHTML = '';
   lojas.forEach(loja => {
-    const card = document.createElement('div');
-    card.className = 'store-card';
-    card.dataset.status = loja.status;
-    const labelStatus = {
-      aberta:'Aberta', fechada:'Fechada', tapume:'Tapume', nova:'Nova', pendente:'Pendente'
-    }[loja.status] || loja.status;
-    card.innerHTML = `
+    lista.appendChild(criarCardLoja(loja));
+  });
+}
+
+function criarCardLoja(loja) {
+  const card = document.createElement('div');
+  card.className = 'store-card';
+  card.dataset.status = loja.status;
+  card.dataset.lojaId = loja.id;
+
+  const botoesHTML = Object.entries(STATUS_MAP).map(([key, info]) => `
+    <button class="status-btn${loja.status === key ? ' selected' : ''}"
+            data-value="${key}" data-loja-id="${loja.id}">
+      <span class="ico">${info.ico}</span>
+      <span>${info.label}</span>
+    </button>
+  `).join('');
+
+  const obsTexto = loja.obs ? loja.obs : 'Adicionar observação';
+  const obsClass = loja.obs ? 'obs-btn has-obs' : 'obs-btn';
+
+  card.innerHTML = `
+    <div class="store-header">
       <div class="store-info">
         <div class="store-number">Loja ${loja.numero}</div>
         <div class="store-name">${loja.nome || '—'}</div>
-        <div class="store-meta">
-          <span class="store-status-tag status-${loja.status}">${labelStatus}</span>
-          ${loja.data ? `<span>📅 ${formatarData(loja.data)}</span>` : ''}
-        </div>
       </div>
-      <div class="store-chevron">›</div>
-    `;
-    card.onclick = () => abrirEdicao(loja.id);
-    lista.appendChild(card);
+      ${loja.data ? `<div class="store-date">📅 ${formatarData(loja.data)}</div>` : ''}
+    </div>
+    <div class="status-buttons">${botoesHTML}</div>
+    <div class="store-footer">
+      <button class="${obsClass}" data-loja-id="${loja.id}">
+        📝 <span class="text">${obsTexto}</span>
+      </button>
+      <button class="menu-btn" data-loja-id="${loja.id}" title="Mais opções">⋯</button>
+    </div>
+  `;
+
+  // Eventos dos botões de status
+  card.querySelectorAll('.status-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      marcarStatus(loja.id, btn.dataset.value, card);
+    });
   });
+
+  // Botão observação
+  card.querySelector('.obs-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    abrirObservacao(loja.id);
+  });
+
+  // Botão menu
+  card.querySelector('.menu-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    abrirMenu(loja.id);
+  });
+
+  return card;
+}
+
+// ========== MARCAR STATUS INLINE (a grande novidade) ==========
+async function marcarStatus(lojaId, novoStatus, cardEl) {
+  const piso = ESTADO.pisoSelecionado;
+  const loja = ESTADO.dados[ESTADO.mesSelecionado][piso].find(l => l.id === lojaId);
+  if (!loja) return;
+
+  // Se clicar no mesmo status, desmarca (volta para pendente)
+  const statusFinal = (loja.status === novoStatus) ? 'pendente' : novoStatus;
+
+  loja.status = statusFinal;
+  loja.data = statusFinal === 'pendente' ? '' : hojeISO();
+
+  // Feedback visual imediato — atualiza só o card sem re-renderizar tudo
+  cardEl.dataset.status = statusFinal;
+  cardEl.classList.add('saved');
+  setTimeout(() => cardEl.classList.remove('saved'), 600);
+
+  cardEl.querySelectorAll('.status-btn').forEach(b => {
+    b.classList.toggle('selected', b.dataset.value === statusFinal);
+  });
+
+  // Atualiza a data no header do card
+  const dateEl = cardEl.querySelector('.store-date');
+  if (statusFinal === 'pendente') {
+    if (dateEl) dateEl.remove();
+  } else {
+    const texto = `📅 ${formatarData(loja.data)}`;
+    if (dateEl) { dateEl.textContent = texto; }
+    else {
+      const span = document.createElement('div');
+      span.className = 'store-date';
+      span.textContent = texto;
+      cardEl.querySelector('.store-header').appendChild(span);
+    }
+  }
+
+  // Atualiza contadores laterais
+  renderizarPisos();
+  atualizarProgresso();
+  atualizarResumoInline();
+
+  // Salva (com debounce para agrupar cliques rápidos)
+  debounceSalvar();
+}
+
+let debounceTimer = null;
+function debounceSalvar() {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(async () => { await salvarDados(); }, 600);
+}
+
+function atualizarResumoInline() {
+  const piso = ESTADO.pisoSelecionado;
+  const lojas = ESTADO.dados[ESTADO.mesSelecionado]?.[piso] || [];
+  const count = { aberta:0, fechada:0, tapume:0, nova:0, pendente:0 };
+  lojas.forEach(l => { count[l.status] = (count[l.status] || 0) + 1; });
+  document.getElementById('sectionResumo').textContent =
+    `✅${count.aberta} ❌${count.fechada} 🚧${count.tapume} 🆕${count.nova} ⏳${count.pendente}`;
 }
 
 function atualizarProgresso() {
@@ -851,34 +855,69 @@ function fecharSheets() {
   document.body.style.overflow = '';
 }
 
-// ========== EDITAR LOJA ==========
-function abrirEdicao(id) {
+// ========== OBSERVAÇÃO ==========
+function abrirObservacao(lojaId) {
+  const piso = ESTADO.pisoSelecionado;
+  const loja = ESTADO.dados[ESTADO.mesSelecionado][piso].find(l => l.id === lojaId);
+  if (!loja) return;
+  document.getElementById('obsLojaId').value = loja.id;
+  document.getElementById('obsTitulo').textContent = `Loja ${loja.numero}`;
+  document.getElementById('obsTexto').value = loja.obs || '';
+  document.getElementById('obsData').value = loja.data || hojeISO();
+  abrirSheet('sheetObs');
+  setTimeout(() => document.getElementById('obsTexto').focus(), 300);
+}
+
+async function salvarObservacao() {
+  const id = document.getElementById('obsLojaId').value;
   const piso = ESTADO.pisoSelecionado;
   const loja = ESTADO.dados[ESTADO.mesSelecionado][piso].find(l => l.id === id);
   if (!loja) return;
-  lojaEmEdicao = loja;
-  document.getElementById('editLojaId').value = loja.id;
-  document.getElementById('sheetTitulo').textContent = `Loja ${loja.numero}`;
-  document.getElementById('sheetSubtitulo').textContent = loja.nome;
-  document.getElementById('editNumero').value = loja.numero || '';
-  document.getElementById('editNome').value = loja.nome || '';
-  document.getElementById('editObservacao').value = loja.obs || '';
-  document.getElementById('editData').value = loja.data || new Date().toISOString().slice(0,10);
-  document.querySelectorAll('#statusOptions .status-option').forEach(btn => {
-    btn.classList.toggle('selected', btn.dataset.value === loja.status);
-  });
-  abrirSheet('sheetEditar');
+  loja.obs = document.getElementById('obsTexto').value.trim();
+  const dataInput = document.getElementById('obsData').value;
+  if (dataInput && loja.status !== 'pendente') loja.data = dataInput;
+  fecharSheets();
+  renderizarLojas();
+  await salvarDados();
 }
 
-async function salvarEdicao() {
-  if (!lojaEmEdicao) return;
-  const statusSelecionado = document.querySelector('#statusOptions .status-option.selected');
-  const status = statusSelecionado ? statusSelecionado.dataset.value : lojaEmEdicao.status;
-  lojaEmEdicao.status = status;
-  lojaEmEdicao.numero = document.getElementById('editNumero').value.trim() || lojaEmEdicao.numero;
-  lojaEmEdicao.nome = document.getElementById('editNome').value.trim() || lojaEmEdicao.nome;
-  lojaEmEdicao.obs = document.getElementById('editObservacao').value.trim();
-  lojaEmEdicao.data = document.getElementById('editData').value;
+// ========== MENU DE AÇÕES ==========
+function abrirMenu(lojaId) {
+  const piso = ESTADO.pisoSelecionado;
+  const loja = ESTADO.dados[ESTADO.mesSelecionado][piso].find(l => l.id === lojaId);
+  if (!loja) return;
+  lojaMenuAtual = loja;
+  document.getElementById('menuTitulo').textContent = `Loja ${loja.numero}`;
+  document.getElementById('menuSubtitulo').textContent = loja.nome;
+  abrirSheet('sheetMenu');
+}
+
+function editarNomeNumero() {
+  if (!lojaMenuAtual) return;
+  document.getElementById('editLojaId').value = lojaMenuAtual.id;
+  document.getElementById('editNumero').value = lojaMenuAtual.numero;
+  document.getElementById('editNome').value = lojaMenuAtual.nome;
+  fecharSheets();
+  setTimeout(() => abrirSheet('sheetEditar'), 350);
+}
+
+async function salvarEdicaoNome() {
+  const id = document.getElementById('editLojaId').value;
+  const piso = ESTADO.pisoSelecionado;
+  const loja = ESTADO.dados[ESTADO.mesSelecionado][piso].find(l => l.id === id);
+  if (!loja) return;
+  loja.numero = document.getElementById('editNumero').value.trim() || loja.numero;
+  loja.nome = document.getElementById('editNome').value.trim() || loja.nome;
+  fecharSheets();
+  renderizarLojas();
+  await salvarDados();
+}
+
+async function limparStatusLoja() {
+  if (!lojaMenuAtual) return;
+  if (!confirm(`Voltar "${lojaMenuAtual.nome}" para pendente?`)) return;
+  lojaMenuAtual.status = 'pendente';
+  lojaMenuAtual.data = '';
   fecharSheets();
   renderizarPisos();
   renderizarLojas();
@@ -886,12 +925,12 @@ async function salvarEdicao() {
   await salvarDados();
 }
 
-async function excluirLoja() {
-  if (!lojaEmEdicao) return;
-  if (!confirm(`Excluir a loja ${lojaEmEdicao.numero} - ${lojaEmEdicao.nome} do roteiro deste mês?`)) return;
+async function excluirLojaDoMes() {
+  if (!lojaMenuAtual) return;
+  if (!confirm(`Excluir "${lojaMenuAtual.numero} - ${lojaMenuAtual.nome}" do roteiro DESTE mês?\n\nIsso NÃO afeta os outros meses.`)) return;
   const piso = ESTADO.pisoSelecionado;
   const arr = ESTADO.dados[ESTADO.mesSelecionado][piso];
-  const idx = arr.findIndex(l => l.id === lojaEmEdicao.id);
+  const idx = arr.findIndex(l => l.id === lojaMenuAtual.id);
   if (idx >= 0) arr.splice(idx, 1);
   fecharSheets();
   renderizarPisos();
@@ -924,7 +963,7 @@ async function salvarNovaLoja() {
   if (!numero) { alert('Informe o número da loja'); return; }
   const nova = {
     id: gerarId(), numero, nome: nome || 'Vaga',
-    status, obs: '', data: new Date().toISOString().slice(0,10)
+    status, obs: '', data: status === 'pendente' ? '' : hojeISO()
   };
   ESTADO.dados[ESTADO.mesSelecionado][piso].push(nova);
   fecharSheets();
@@ -968,9 +1007,7 @@ function selecionarMesNaLista(m, ev) {
 async function confirmarMes() {
   const novo = document.getElementById('inputMes').value;
   if (!novo) { alert('Escolha um mês'); return; }
-  if (!ESTADO.dados[novo]) {
-    ESTADO.dados[novo] = construirMesBase();
-  }
+  if (!ESTADO.dados[novo]) ESTADO.dados[novo] = construirMesBase();
   ESTADO.mesSelecionado = novo;
   ESTADO.pisoSelecionado = Object.keys(ESTADO.dados[novo])[0];
   fecharSheets();
@@ -985,7 +1022,7 @@ async function resetarRoteiroMes() {
   fecharSheets();
   renderizarTudo();
   await salvarDados();
-  alert('✅ Roteiro resetado para o padrão original.');
+  alert('✅ Roteiro resetado.');
 }
 
 // ========== CÓPIA DO MÊS ANTERIOR ==========
@@ -1029,29 +1066,20 @@ function abrirResumoCopia() {
   let html = '';
   const totalAnt = Object.values(lojasAnt).flat().length;
   html += `<div class="resumo-destaque">
-    <strong>O que será copiado:</strong><br>
-    • Nome atual de cada loja<br>
-    • Pisos e numeração<br>
-    • Total de <strong>${totalAnt} lojas</strong><br><br>
-    <strong>O que será resetado:</strong><br>
-    • Status volta para <em>pendente</em><br>
-    • Observações e datas em branco
+    <strong>Será copiado:</strong> nome, piso e numeração de <strong>${totalAnt} lojas</strong><br>
+    <strong>Será resetado:</strong> status (volta a pendente), observações e datas
   </div>`;
   Object.keys(lojasAnt).forEach(piso => {
     const lojas = lojasAnt[piso];
     html += `<div class="form-label" style="margin-top:16px;">${piso} — ${lojas.length} loja(s)</div>`;
-    lojas.slice(0, 8).forEach(l => {
-      const labelStatus = {
-        aberta:'Aberta', fechada:'Fechada', tapume:'Tapume', nova:'Nova', pendente:'Pendente'
-      }[l.status] || l.status;
+    lojas.slice(0, 5).forEach(l => {
+      const st = STATUS_MAP[l.status];
       html += `<div class="resumo-item">
         <span class="resumo-label">${l.numero} · ${l.nome}</span>
-        <span class="resumo-valor"><span class="store-status-tag status-${l.status}" style="font-size:10px;">${labelStatus}</span></span>
+        <span class="resumo-valor">${st ? st.ico + ' ' + st.label : 'Pendente'}</span>
       </div>`;
     });
-    if (lojas.length > 8) {
-      html += `<div class="resumo-item" style="justify-content:center;color:var(--gray);font-style:italic;">+ ${lojas.length - 8} loja(s)...</div>`;
-    }
+    if (lojas.length > 5) html += `<div class="resumo-item" style="justify-content:center;color:var(--gray);font-style:italic;">+ ${lojas.length - 5} loja(s)...</div>`;
   });
   document.getElementById('resumoBody').innerHTML = html;
   abrirSheet('sheetResumoCopia');
@@ -1081,18 +1109,10 @@ async function confirmarCopia() {
 
 // ========== EVENTOS ==========
 document.getElementById('overlay').addEventListener('click', fecharSheets);
-document.getElementById('btnCancelar').addEventListener('click', fecharSheets);
-document.getElementById('btnCancelarAdd').addEventListener('click', fecharSheets);
-document.getElementById('btnSalvar').addEventListener('click', salvarEdicao);
+document.getElementById('btnSalvarObs').addEventListener('click', salvarObservacao);
+document.getElementById('btnSalvarEdit').addEventListener('click', salvarEdicaoNome);
 document.getElementById('btnSalvarAdd').addEventListener('click', salvarNovaLoja);
-document.getElementById('btnExcluirLoja').addEventListener('click', excluirLoja);
 document.getElementById('fabAdd').addEventListener('click', abrirAdicionar);
-document.querySelectorAll('#statusOptions .status-option').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('#statusOptions .status-option').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-  });
-});
 
 // Expõe funções usadas em onclick inline
 window.abrirSeletorMes = abrirSeletorMes;
@@ -1103,6 +1123,9 @@ window.abrirResumoCopia = abrirResumoCopia;
 window.confirmarCopia = confirmarCopia;
 window.selecionarMesNaLista = selecionarMesNaLista;
 window.resetarRoteiroMes = resetarRoteiroMes;
+window.editarNomeNumero = editarNomeNumero;
+window.limparStatusLoja = limparStatusLoja;
+window.excluirLojaDoMes = excluirLojaDoMes;
 </script>
 </body>
 </html>
