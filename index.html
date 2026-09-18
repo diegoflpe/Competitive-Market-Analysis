@@ -48,97 +48,31 @@
   /* LISTA DE LOJAS */
   main { padding: 12px 16px 100px; padding-bottom: calc(100px + env(safe-area-inset-bottom)); }
   .store-list { display: flex; flex-direction: column; gap: 10px; }
-
-  .store-card {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 14px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    border-left: 5px solid var(--border);
-    transition: border-color 0.2s;
-  }
+  .store-card { background: var(--card); border-radius: var(--radius); padding: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-left: 5px solid var(--border); transition: border-color 0.2s; }
   .store-card[data-status="aberta"] { border-left-color: var(--success); }
   .store-card[data-status="fechada"] { border-left-color: var(--danger); }
   .store-card[data-status="tapume"] { border-left-color: var(--warning); }
   .store-card[data-status="nova"] { border-left-color: var(--primary-light); }
   .store-card[data-status="pendente"] { border-left-color: var(--gray); }
-
   .store-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
-  .store-name {
-    flex: 1;
-    font-size: 21px;
-    font-weight: 700;
-    color: var(--primary);
-    line-height: 1.2;
-    letter-spacing: -0.3px;
-    word-break: break-word;
-  }
+  .store-name { flex: 1; font-size: 21px; font-weight: 700; color: var(--primary); line-height: 1.2; letter-spacing: -0.3px; word-break: break-word; }
   .store-date { font-size: 11px; color: var(--gray); white-space: nowrap; padding-top: 4px; }
 
   /* BOTÕES DE STATUS INLINE */
-  .status-buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-  }
-  .status-btn {
-    padding: 10px 4px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    background: white;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--gray);
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-    transition: all 0.15s;
-    font-family: inherit;
-    line-height: 1.1;
-    min-height: 52px;
-  }
+  .status-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .status-btn { padding: 10px 4px; border: 1.5px solid var(--border); border-radius: 10px; background: white; font-size: 11px; font-weight: 600; color: var(--gray); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; transition: all 0.15s; font-family: inherit; line-height: 1.1; min-height: 52px; }
   .status-btn .ico { font-size: 18px; line-height: 1; }
   .status-btn:active { transform: scale(0.95); }
-
   .status-btn[data-value="aberta"].selected  { background: #dcfce7; border-color: var(--success); color: #15803d; }
   .status-btn[data-value="fechada"].selected { background: #fee2e2; border-color: var(--danger); color: #b91c1c; }
   .status-btn[data-value="tapume"].selected  { background: #fef3c7; border-color: var(--warning); color: #b45309; }
   .status-btn[data-value="nova"].selected    { background: #dbeafe; border-color: var(--primary-light); color: #1d4ed8; }
 
-  /* Feedback de salvamento */
   .store-card.saved { animation: flashSaved 0.6s ease; }
-  @keyframes flashSaved {
-    0% { background: #f0fdf4; }
-    100% { background: var(--card); }
-  }
+  @keyframes flashSaved { 0% { background: #f0fdf4; } 100% { background: var(--card); } }
 
-  /* Linha de ações secundárias */
-  .store-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px dashed var(--border);
-    gap: 8px;
-  }
-  .obs-btn {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: var(--gray);
-    font-size: 12px;
-    padding: 6px 4px;
-    text-align: left;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: inherit;
-    min-width: 0;
-  }
+  .store-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); gap: 8px; }
+  .obs-btn { flex: 1; background: transparent; border: none; color: var(--gray); font-size: 12px; padding: 6px 4px; text-align: left; cursor: pointer; display: flex; align-items: center; gap: 6px; font-family: inherit; min-width: 0; }
   .obs-btn span.text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .obs-btn.has-obs { color: #1d4ed8; font-weight: 500; }
   .menu-btn { background: transparent; border: none; color: var(--gray); font-size: 18px; padding: 4px 8px; cursor: pointer; border-radius: 6px; line-height: 1; }
@@ -168,7 +102,6 @@
   .btn-primary { background: var(--primary); color: white; }
   .btn:active { opacity: 0.85; }
 
-  /* Menu de ações */
   .menu-item { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 10px; cursor: pointer; font-size: 15px; color: var(--text); transition: background 0.15s; }
   .menu-item:active { background: var(--bg); }
   .menu-item .emoji { font-size: 20px; width: 24px; text-align: center; }
@@ -197,13 +130,26 @@
   .mes-lista-item { cursor: pointer; padding: 12px; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
   .mes-lista-item.selecionado { border-color: #1e3a8a; background: #eff6ff; }
 
+  /* HISTÓRICO */
+  .hist-item { display: flex; gap: 12px; padding: 12px; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; align-items: flex-start; }
+  .hist-mes { background: var(--primary); color: white; border-radius: 8px; padding: 6px 10px; font-size: 12px; font-weight: 700; white-space: nowrap; min-width: 65px; text-align: center; }
+  .hist-info { flex: 1; min-width: 0; }
+  .hist-status { font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 4px; }
+  .hist-status.aberta  { color: #15803d; }
+  .hist-status.fechada { color: #b91c1c; }
+  .hist-status.tapume  { color: #b45309; }
+  .hist-status.nova    { color: #1d4ed8; }
+  .hist-status.pendente{ color: var(--gray); }
+  .hist-obs { font-size: 12px; color: var(--gray); line-height: 1.4; margin-top: 2px; }
+  .hist-data { font-size: 11px; color: var(--gray); margin-top: 4px; }
+
   /* SYNC */
   .sync-status { position: fixed; left: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); background: rgba(30,41,59,0.9); color: white; font-size: 11px; padding: 6px 12px; border-radius: 20px; z-index: 60; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
   .sync-status.show { opacity: 1; }
   .sync-status.erro { background: rgba(220,38,38,0.95); }
 
-  .action-row { display: flex; gap: 8px; margin-top: 16px; }
-  .action-row .btn { padding: 10px; font-size: 13px; }
+  .action-row { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+  .action-row .btn { padding: 12px; font-size: 13px; }
 </style>
 </head>
 <body>
@@ -283,7 +229,7 @@
       <textarea id="obsTexto" placeholder="Ex: Fechada para reforma, previsão de reabertura em março..." rows="5"></textarea>
     </div>
     <div class="form-group">
-      <label class="form-label" for="obsData">Data</label>
+      <label class="form-label" for="obsData">Data da vistoria</label>
       <input type="date" id="obsData">
     </div>
   </div>
@@ -301,6 +247,9 @@
     <div class="sheet-subtitle" id="menuSubtitulo">—</div>
   </div>
   <div class="sheet-body" style="padding: 8px 12px;">
+    <div class="menu-item" onclick="verHistoricoLoja()">
+      <span class="emoji">📅</span> Ver histórico desta loja
+    </div>
     <div class="menu-item" onclick="editarNome()">
       <span class="emoji">✏️</span> Editar nome da loja
     </div>
@@ -311,6 +260,19 @@
       <span class="emoji">🗑</span> Excluir do roteiro deste mês
     </div>
   </div>
+  <div class="sheet-footer">
+    <button class="btn btn-secondary" onclick="fecharSheets()">Fechar</button>
+  </div>
+</div>
+
+<!-- SHEET: HISTÓRICO -->
+<div class="sheet" id="sheetHistorico">
+  <div class="sheet-handle"></div>
+  <div class="sheet-header">
+    <div class="sheet-title" id="histTitulo">Histórico</div>
+    <div class="sheet-subtitle" id="histSubtitulo">—</div>
+  </div>
+  <div class="sheet-body" id="histBody"></div>
   <div class="sheet-footer">
     <button class="btn btn-secondary" onclick="fecharSheets()">Fechar</button>
   </div>
@@ -376,6 +338,8 @@
     <div class="form-group"><label class="form-label">Mês / ano</label><input type="month" id="inputMes"></div>
     <div id="listaMesesExistentes"></div>
     <div class="action-row">
+      <button class="btn btn-secondary" onclick="abrirNovaVistoria()">🆕 Nova vistoria (mês anterior)</button>
+      <button class="btn btn-secondary" onclick="exportarCSV()">📊 Exportar CSV (mudanças do mês)</button>
       <button class="btn btn-secondary" onclick="resetarRoteiroMes()">🔄 Resetar roteiro deste mês</button>
     </div>
   </div>
@@ -403,7 +367,9 @@ import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
 import { getFirestore, doc, getDoc, setDoc }
   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// ========== CONFIGURAÇÃO (SUBSTITUA!) ==========
+// ============================================================
+// CONFIGURAÇÃO FIREBASE (SUBSTITUA pelos seus dados!)
+// ============================================================
 const firebaseConfig = {
   apiKey: "AIzaSyA5o8k3tOuNqlvNgx0n7R3NJEPqW41dN-c",
   authDomain: "competitive-market-analysis.firebaseapp.com",
@@ -418,7 +384,9 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const DOC_REF = doc(db, 'vistorias', 'shoppingCenter');
 
-// ========== ROTEIRO BASE (só nomes, sem números) ==========
+// ============================================================
+// ROTEIRO BASE
+// ============================================================
 const ROTEIRO_BASE = {
   "Térreo": [
     'Narciso Enxovais','Vaga','Americanas','Universo dos Games','Zumaz','Criativa Brinquedos',
@@ -428,7 +396,7 @@ const ROTEIRO_BASE = {
     'Casa do Celular','Íris Semijoias','Reparus','Laser Eletro','Aliança Colchões','G&E Acessórios','Unigames','Ótica Liberty',
     'Zeiss','Ótica Líder','Colchões Ortobom','Tim','Ótica Chilli Beans','Espaço Laser','World Technology','Vaga','Vaga',
     'Óticas Carol','Drogaria São Paulo','Mundo do Cabeleireiro','Oculum','Mundo do Cabeleireiro','Linda Semijoias e Acessórios','SOS Relógios',
-    'Lajoya','Club da Miçanga & Cia da Montagem','Millena Móveis','World Tennis','Vaga','Vaga','Millena Móveis'
+    'Lajoya','Club da Miçanga & Cia da Montagem','Millena Móveis','World Tennis','Vaga','Vaga'
   ],
   "L1": [
     'Riachuelo','Vaga','Vaga Oficina de Slimes','Vaga Oficina de Slimes','Kid Stok','Danilas Semijoias','C&A','Vaga','Ótica Capibaribe',
@@ -461,8 +429,20 @@ const ROTEIRO_BASE = {
   ]
 };
 
-// ========== UTILITÁRIOS ==========
-function mesAtualChave() { const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`; }
+// ============================================================
+// UTILITÁRIOS DE DATA
+// ============================================================
+function mesAtualChave() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+}
+
+function mesAnteriorChave(chave) {
+  const [ano, mes] = chave.split('-').map(Number);
+  const d = new Date(ano, mes - 2, 1);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+}
+
 const MESES_CURTO = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
 const MESES_LONGO = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 function nomeMesCurto(c) { const [a,n]=c.split('-'); return `${MESES_CURTO[parseInt(n)-1]}/${a}`; }
@@ -475,14 +455,23 @@ function construirMesBase() {
   const mes = {};
   Object.keys(ROTEIRO_BASE).forEach(piso => {
     mes[piso] = ROTEIRO_BASE[piso].map(nome => ({
-      id: gerarId(), nome,
-      status: 'pendente', obs: '', data: ''
+      id: gerarId(), nome, status: 'pendente', obs: '', data: ''
     }));
   });
   return mes;
 }
 
-// ========== ESTADO ==========
+const STATUS_MAP = {
+  aberta:  { label: 'Aberta',  ico: '✅' },
+  fechada: { label: 'Fechada', ico: '❌' },
+  tapume:  { label: 'Tapume',  ico: '🚧' },
+  nova:    { label: 'Nova',    ico: '🆕' },
+  pendente:{ label: 'Pendente',ico: '⏳' }
+};
+
+// ============================================================
+// ESTADO
+// ============================================================
 const ESTADO = {
   mesSelecionado: mesAtualChave(),
   pisoSelecionado: null,
@@ -491,9 +480,12 @@ const ESTADO = {
 };
 let mesAnteriorDetectado = null;
 let lojaMenuAtual = null;
+let lojaMenuPiso = null;
 let salvandoTimeout = null;
 
-// ========== LOGIN ==========
+// ============================================================
+// LOGIN
+// ============================================================
 const loginScreen = document.getElementById('loginScreen');
 const loginError = document.getElementById('loginError');
 const btnLogin = document.getElementById('btnLogin');
@@ -512,7 +504,8 @@ btnLogin.addEventListener('click', async () => {
       'auth/invalid-email': 'E-mail inválido.', 'auth/user-not-found': 'Usuário não encontrado.',
       'auth/wrong-password': 'Senha incorreta.', 'auth/invalid-credential': 'E-mail ou senha incorretos.',
       'auth/too-many-requests': 'Muitas tentativas. Tente em alguns minutos.',
-      'auth/network-request-failed': 'Sem conexão com a internet.'
+      'auth/network-request-failed': 'Sem conexão com a internet.',
+      'auth/api-key-not-valid.-please-pass-a-valid-api-key.': '⚠️ API Key inválida. Substitua o firebaseConfig no código.'
     };
     mostrarErroLogin(msgs[e.code] || 'Erro: ' + e.message);
   } finally { btnLogin.disabled = false; btnLogin.textContent = 'Entrar'; }
@@ -521,7 +514,6 @@ btnLogin.addEventListener('click', async () => {
 document.getElementById('loginSenha').addEventListener('keydown', e => { if (e.key === 'Enter') btnLogin.click(); });
 document.getElementById('btnLogout').addEventListener('click', async () => { if (confirm('Deseja sair?')) await signOut(auth); });
 
-// ========== AUTH OBSERVER ==========
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     loginScreen.classList.add('hidden');
@@ -542,7 +534,9 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
-// ========== FIRESTORE ==========
+// ============================================================
+// FIRESTORE
+// ============================================================
 async function carregarDados() {
   try {
     const snap = await getDoc(DOC_REF);
@@ -553,14 +547,41 @@ async function carregarDados() {
       ESTADO.dados[ESTADO.mesSelecionado] = construirMesBase();
       await salvarDados(true);
     }
-    if (!ESTADO.dados[ESTADO.mesSelecionado]) ESTADO.dados[ESTADO.mesSelecionado] = construirMesBase();
-    Object.keys(ROTEIRO_BASE).forEach(piso => {
-      if (!ESTADO.dados[ESTADO.mesSelecionado][piso]) {
-        ESTADO.dados[ESTADO.mesSelecionado][piso] = ROTEIRO_BASE[piso].map(nome => ({
-          id: gerarId(), nome, status: 'pendente', obs: '', data: ''
-        }));
-      }
+
+    // Garante que todos os meses têm todos os pisos do roteiro base
+    Object.keys(ESTADO.dados).forEach(mes => {
+      Object.keys(ROTEIRO_BASE).forEach(piso => {
+        if (!ESTADO.dados[mes][piso]) {
+          ESTADO.dados[mes][piso] = ROTEIRO_BASE[piso].map(nome => ({
+            id: gerarId(), nome, status: 'pendente', obs: '', data: ''
+          }));
+        }
+      });
     });
+
+    // 🎯 MÊS INICIAL INTELIGENTE (vistoria retroativa)
+    const mesAtual = mesAtualChave();
+    const mesAnterior = mesAnteriorChave(mesAtual);
+
+    // Garante que o mês atual existe (mesmo vazio) para checar
+    if (!ESTADO.dados[mesAtual]) {
+      ESTADO.dados[mesAtual] = construirMesBase();
+    }
+
+    const lojasDoMesAtual = Object.values(ESTADO.dados[mesAtual]).flat();
+    const atualTemVistoria = lojasDoMesAtual.some(l => l.status !== 'pendente');
+
+    const dadosMesAnterior = ESTADO.dados[mesAnterior];
+    const anteriorTemDados = dadosMesAnterior && Object.values(dadosMesAnterior).flat().length > 0;
+
+    if (!atualTemVistoria && anteriorTemDados) {
+      // Abre automaticamente no mês anterior (vistoria retroativa)
+      ESTADO.mesSelecionado = mesAnterior;
+      mostrarSync(`Abrindo em ${nomeMesCurto(mesAnterior)} (vistoria retroativa)`);
+    } else {
+      ESTADO.mesSelecionado = mesAtual;
+    }
+
     ESTADO.pisoSelecionado = Object.keys(ESTADO.dados[ESTADO.mesSelecionado])[0];
     renderizarTudo();
   } catch (e) {
@@ -568,7 +589,14 @@ async function carregarDados() {
     const local = localStorage.getItem('vistoria_cache');
     if (local) {
       ESTADO.dados = JSON.parse(local);
-      ESTADO.pisoSelecionado = Object.keys(ESTADO.dados[ESTADO.mesSelecionado] || {})[0];
+      const mes = ESTADO.mesSelecionado;
+      if (ESTADO.dados[mes]) {
+        ESTADO.pisoSelecionado = Object.keys(ESTADO.dados[mes])[0];
+      } else {
+        const primeiroMes = Object.keys(ESTADO.dados).sort().reverse()[0];
+        ESTADO.mesSelecionado = primeiroMes;
+        ESTADO.pisoSelecionado = Object.keys(ESTADO.dados[primeiroMes])[0];
+      }
       renderizarTudo();
       mostrarSync('Modo offline (cache local)', true);
     } else { alert('Erro ao carregar: ' + e.message); }
@@ -591,10 +619,12 @@ function mostrarSync(msg, erro = false) {
   const el = document.getElementById('syncStatus');
   el.textContent = msg; el.classList.toggle('erro', erro); el.classList.add('show');
   clearTimeout(salvandoTimeout);
-  salvandoTimeout = setTimeout(() => el.classList.remove('show'), 1500);
+  salvandoTimeout = setTimeout(() => el.classList.remove('show'), 2000);
 }
 
-// ========== RENDERIZAÇÃO ==========
+// ============================================================
+// RENDERIZAÇÃO
+// ============================================================
 function renderizarTudo() {
   atualizarBadgeMes();
   renderizarPisos();
@@ -620,13 +650,6 @@ function renderizarPisos() {
     nav.appendChild(btn);
   });
 }
-
-const STATUS_MAP = {
-  aberta:  { label: 'Aberta',  ico: '✅' },
-  fechada: { label: 'Fechada', ico: '❌' },
-  tapume:  { label: 'Tapume',  ico: '🚧' },
-  nova:    { label: 'Nova',    ico: '🆕' }
-};
 
 function renderizarLojas() {
   const lista = document.getElementById('storeList');
@@ -658,7 +681,7 @@ function criarCardLoja(loja) {
   card.dataset.status = loja.status;
   card.dataset.lojaId = loja.id;
 
-  const botoesHTML = Object.entries(STATUS_MAP).map(([key, info]) => `
+  const botoesHTML = Object.entries(STATUS_MAP).filter(([k]) => k !== 'pendente').map(([key, info]) => `
     <button class="status-btn${loja.status === key ? ' selected' : ''}"
             data-value="${key}" data-loja-id="${loja.id}">
       <span class="ico">${info.ico}</span>
@@ -692,7 +715,6 @@ function criarCardLoja(loja) {
   return card;
 }
 
-// ========== MARCAR STATUS INLINE ==========
 async function marcarStatus(lojaId, novoStatus, cardEl) {
   const piso = ESTADO.pisoSelecionado;
   const loja = ESTADO.dados[ESTADO.mesSelecionado][piso].find(l => l.id === lojaId);
@@ -751,7 +773,9 @@ function atualizarProgresso() {
   document.getElementById('progressFill').style.width = pct + '%';
 }
 
-// ========== SHEETS ==========
+// ============================================================
+// SHEETS
+// ============================================================
 function abrirSheet(id) {
   document.getElementById('overlay').classList.add('open');
   document.getElementById(id).classList.add('open');
@@ -763,7 +787,9 @@ function fecharSheets() {
   document.body.style.overflow = '';
 }
 
-// ========== OBSERVAÇÃO ==========
+// ============================================================
+// OBSERVAÇÃO
+// ============================================================
 function abrirObservacao(lojaId) {
   const piso = ESTADO.pisoSelecionado;
   const loja = ESTADO.dados[ESTADO.mesSelecionado][piso].find(l => l.id === lojaId);
@@ -783,23 +809,86 @@ async function salvarObservacao() {
   if (!loja) return;
   loja.obs = document.getElementById('obsTexto').value.trim();
   const dataInput = document.getElementById('obsData').value;
-  if (dataInput && loja.status !== 'pendente') loja.data = dataInput;
+  if (dataInput) loja.data = dataInput;
   fecharSheets();
   renderizarLojas();
   await salvarDados();
 }
 
-// ========== MENU ==========
+// ============================================================
+// MENU DE AÇÕES
+// ============================================================
 function abrirMenu(lojaId) {
   const piso = ESTADO.pisoSelecionado;
   const loja = ESTADO.dados[ESTADO.mesSelecionado][piso].find(l => l.id === lojaId);
   if (!loja) return;
   lojaMenuAtual = loja;
+  lojaMenuPiso = piso;
   document.getElementById('menuTitulo').textContent = loja.nome;
-  document.getElementById('menuSubtitulo').textContent = 'Escolha uma ação';
+  document.getElementById('menuSubtitulo').textContent = `Piso ${piso}`;
   abrirSheet('sheetMenu');
 }
 
+// ============================================================
+// HISTÓRICO POR LOJA
+// ============================================================
+function verHistoricoLoja() {
+  if (!lojaMenuAtual) return;
+  const nomeLoja = lojaMenuAtual.nome;
+  const meses = Object.keys(ESTADO.dados).sort();
+
+  const ocorrencias = [];
+  meses.forEach(mes => {
+    const pisosDoMes = ESTADO.dados[mes];
+    Object.keys(pisosDoMes).forEach(piso => {
+      pisosDoMes[piso].forEach(loja => {
+        if (loja.nome === nomeLoja) {
+          ocorrencias.push({ mes, piso, ...loja });
+        }
+      });
+    });
+  });
+
+  document.getElementById('histTitulo').textContent = nomeLoja;
+  document.getElementById('histSubtitulo').textContent =
+    `${ocorrencias.length} registro(s) em ${Object.keys(ESTADO.dados).length} mês(es)`;
+
+  if (ocorrencias.length === 0) {
+    document.getElementById('histBody').innerHTML = `<div class="empty-state"><div class="icon">📭</div><div>Nenhum registro encontrado</div></div>`;
+    fecharSheets();
+    setTimeout(() => abrirSheet('sheetHistorico'), 350);
+    return;
+  }
+
+  const ordenado = [...ocorrencias].reverse();
+
+  let html = '';
+  ordenado.forEach(o => {
+    const info = STATUS_MAP[o.status] || STATUS_MAP.pendente;
+    const obsHTML = o.obs ? `<div class="hist-obs">📝 ${o.obs}</div>` : '';
+    const dataHTML = o.data ? `<div class="hist-data">Vistoriado em ${formatarData(o.data)}</div>` : '';
+    const pisoHTML = o.piso !== lojaMenuPiso ? ` · Piso ${o.piso}` : '';
+
+    html += `
+      <div class="hist-item">
+        <div class="hist-mes">${nomeMesCurto(o.mes)}</div>
+        <div class="hist-info">
+          <div class="hist-status ${o.status}">${info.ico} ${info.label}${pisoHTML}</div>
+          ${obsHTML}
+          ${dataHTML}
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById('histBody').innerHTML = html;
+  fecharSheets();
+  setTimeout(() => abrirSheet('sheetHistorico'), 350);
+}
+
+// ============================================================
+// EDITAR / LIMPAR / EXCLUIR
+// ============================================================
 function editarNome() {
   if (!lojaMenuAtual) return;
   document.getElementById('editLojaId').value = lojaMenuAtual.id;
@@ -810,7 +899,7 @@ function editarNome() {
 
 async function salvarEdicaoNome() {
   const id = document.getElementById('editLojaId').value;
-  const piso = ESTADO.pisoSelecionado;
+  const piso = lojaMenuPiso || ESTADO.pisoSelecionado;
   const loja = ESTADO.dados[ESTADO.mesSelecionado][piso].find(l => l.id === id);
   if (!loja) return;
   loja.nome = document.getElementById('editNome').value.trim() || loja.nome;
@@ -834,7 +923,7 @@ async function limparStatusLoja() {
 async function excluirLojaDoMes() {
   if (!lojaMenuAtual) return;
   if (!confirm(`Excluir "${lojaMenuAtual.nome}" do roteiro DESTE mês?\n\nIsso NÃO afeta os outros meses.`)) return;
-  const piso = ESTADO.pisoSelecionado;
+  const piso = lojaMenuPiso || ESTADO.pisoSelecionado;
   const arr = ESTADO.dados[ESTADO.mesSelecionado][piso];
   const idx = arr.findIndex(l => l.id === lojaMenuAtual.id);
   if (idx >= 0) arr.splice(idx, 1);
@@ -845,7 +934,9 @@ async function excluirLojaDoMes() {
   await salvarDados();
 }
 
-// ========== ADICIONAR ==========
+// ============================================================
+// ADICIONAR LOJA
+// ============================================================
 function abrirAdicionar() {
   const selectPiso = document.getElementById('addPiso');
   selectPiso.innerHTML = '';
@@ -878,10 +969,22 @@ async function salvarNovaLoja() {
   await salvarDados();
 }
 
-// ========== MESES ==========
+// ============================================================
+// NAVEGAÇÃO ENTRE MESES
+// ============================================================
 function abrirSeletorMes() {
   document.getElementById('inputMes').value = ESTADO.mesSelecionado;
   renderizarListaMeses();
+  abrirSheet('sheetMes');
+}
+
+function abrirNovaVistoria() {
+  const sugestao = mesAnteriorChave(mesAtualChave());
+  document.getElementById('inputMes').value = sugestao;
+  renderizarListaMeses();
+  document.querySelectorAll('.mes-lista-item').forEach(el => {
+    el.classList.toggle('selecionado', el.dataset.mes === sugestao);
+  });
   abrirSheet('sheetMes');
 }
 
@@ -894,7 +997,7 @@ function renderizarListaMeses() {
     const lojas = Object.values(ESTADO.dados[m]).flat();
     const feitas = lojas.filter(l => l.status !== 'pendente').length;
     const sel = m === ESTADO.mesSelecionado ? ' selecionado' : '';
-    html += `<div class="mes-lista-item${sel}" onclick="selecionarMesNaLista('${m}', event)">
+    html += `<div class="mes-lista-item${sel}" data-mes="${m}" onclick="selecionarMesNaLista('${m}', event)">
       <span class="resumo-label">${nomeMesCurto(m)}</span>
       <span class="resumo-valor">${feitas}/${lojas.length}</span>
     </div>`;
@@ -911,7 +1014,10 @@ function selecionarMesNaLista(m, ev) {
 async function confirmarMes() {
   const novo = document.getElementById('inputMes').value;
   if (!novo) { alert('Escolha um mês'); return; }
-  if (!ESTADO.dados[novo]) ESTADO.dados[novo] = construirMesBase();
+  if (!ESTADO.dados[novo]) {
+    ESTADO.dados[novo] = construirMesBase();
+    mostrarSync('Novo mês criado');
+  }
   ESTADO.mesSelecionado = novo;
   ESTADO.pisoSelecionado = Object.keys(ESTADO.dados[novo])[0];
   fecharSheets();
@@ -929,7 +1035,105 @@ async function resetarRoteiroMes() {
   alert('✅ Roteiro resetado.');
 }
 
-// ========== CÓPIA ==========
+// ============================================================
+// EXPORTAR CSV
+// ============================================================
+function exportarCSV() {
+  const mesAtual = ESTADO.mesSelecionado;
+  const mesAnterior = encontrarMesAnterior();
+
+  const anteriorMap = new Map();
+  if (mesAnterior) {
+    Object.keys(ESTADO.dados[mesAnterior]).forEach(piso => {
+      ESTADO.dados[mesAnterior][piso].forEach(loja => {
+        anteriorMap.set(loja.nome, { status: loja.status, obs: loja.obs || '', piso });
+      });
+    });
+  }
+
+  const linhas = [];
+  linhas.push([
+    'Piso',
+    'Loja',
+    'Status Anterior',
+    'Status Atual',
+    'Mudou?',
+    'Observação',
+    'Data Vistoria'
+  ].join(';'));
+
+  const todas = [];
+  Object.keys(ESTADO.dados[mesAtual]).forEach(piso => {
+    ESTADO.dados[mesAtual][piso].forEach(loja => {
+      todas.push({ piso, ...loja });
+    });
+  });
+
+  let totalMudancas = 0;
+  let totalAbertas = 0, totalFechadas = 0, totalTapumes = 0, totalNovas = 0, totalPendentes = 0;
+
+  todas.forEach(loja => {
+    const anterior = anteriorMap.get(loja.nome);
+    const statusAnt = anterior ? anterior.status : '—';
+    const statusAtual = loja.status;
+
+    const labelAnt = anterior ? (STATUS_MAP[statusAnt]?.label || statusAnt) : 'Novo';
+    const labelAtual = STATUS_MAP[statusAtual]?.label || statusAtual;
+
+    const ehNovo = !anterior;
+    const mudou = anterior && statusAnt !== statusAtual;
+    const flagMudanca = ehNovo ? '🆕 Nova no roteiro' : (mudou ? '⚠️ Mudou' : '');
+
+    if (ehNovo || mudou) totalMudancas++;
+
+    if (statusAtual === 'aberta') totalAbertas++;
+    else if (statusAtual === 'fechada') totalFechadas++;
+    else if (statusAtual === 'tapume') totalTapumes++;
+    else if (statusAtual === 'nova') totalNovas++;
+    else if (statusAtual === 'pendente') totalPendentes++;
+
+    const sanitize = (txt) => `"${String(txt || '').replace(/"/g, '""')}"`;
+
+    linhas.push([
+      sanitize(loja.piso),
+      sanitize(loja.nome),
+      sanitize(labelAnt),
+      sanitize(labelAtual),
+      sanitize(flagMudanca),
+      sanitize(loja.obs || ''),
+      sanitize(loja.data ? formatarData(loja.data) : '')
+    ].join(';'));
+  });
+
+  linhas.push('');
+  linhas.push(`RESUMO DA VISTORIA — ${nomeMesLongo(mesAtual)}`);
+  linhas.push(`Comparado com: ${mesAnterior ? nomeMesLongo(mesAnterior) : 'Nenhum mês anterior'}`);
+  linhas.push(`Total de lojas: ${todas.length}`);
+  linhas.push(`Abertas: ${totalAbertas}`);
+  linhas.push(`Fechadas: ${totalFechadas}`);
+  linhas.push(`Tapumes: ${totalTapumes}`);
+  linhas.push(`Novas: ${totalNovas}`);
+  linhas.push(`Pendentes: ${totalPendentes}`);
+  linhas.push(`Mudanças em relação ao mês anterior: ${totalMudancas}`);
+
+  const csvContent = '\uFEFF' + linhas.join('\n');
+
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `vistoria_${mesAtual}${mesAnterior ? '_vs_' + mesAnterior : ''}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  mostrarSync('✓ CSV exportado');
+}
+
+// ============================================================
+// CÓPIA DO MÊS ANTERIOR
+// ============================================================
 function encontrarMesAnterior() {
   const meses = Object.keys(ESTADO.dados).filter(m => m < ESTADO.mesSelecionado).sort().reverse();
   return meses[0] || null;
@@ -1011,7 +1215,9 @@ async function confirmarCopia() {
   setTimeout(() => alert(`✅ Roteiro copiado! ${total} lojas carregadas.`), 150);
 }
 
-// ========== EVENTOS ==========
+// ============================================================
+// EVENTOS
+// ============================================================
 document.getElementById('overlay').addEventListener('click', fecharSheets);
 document.getElementById('btnSalvarObs').addEventListener('click', salvarObservacao);
 document.getElementById('btnSalvarEdit').addEventListener('click', salvarEdicaoNome);
@@ -1019,6 +1225,7 @@ document.getElementById('btnSalvarAdd').addEventListener('click', salvarNovaLoja
 document.getElementById('fabAdd').addEventListener('click', abrirAdicionar);
 
 window.abrirSeletorMes = abrirSeletorMes;
+window.abrirNovaVistoria = abrirNovaVistoria;
 window.fecharSheets = fecharSheets;
 window.confirmarMes = confirmarMes;
 window.ignorarCopia = ignorarCopia;
@@ -1029,6 +1236,8 @@ window.resetarRoteiroMes = resetarRoteiroMes;
 window.editarNome = editarNome;
 window.limparStatusLoja = limparStatusLoja;
 window.excluirLojaDoMes = excluirLojaDoMes;
+window.verHistoricoLoja = verHistoricoLoja;
+window.exportarCSV = exportarCSV;
 </script>
 </body>
 </html>
